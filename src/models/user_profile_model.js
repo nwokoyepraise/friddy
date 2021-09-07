@@ -7,7 +7,7 @@ module.exports.get_profile_data = async function (email) {
         //retrieve data from DB
         return await user_model.
             findOne({ email: email }).
-            select({email: 1}).
+            select({email: 1, password: 1, username: 1, user_id: 1, timestamp: 1}).
             lean();
     } catch (error) {
         console.log(error);
