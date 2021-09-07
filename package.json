@@ -17,6 +17,10 @@
   },
   "homepage": "https://github.com/nwokoyepraise/friddy#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.0.5",
+    "passport": "^0.4.1",
+    "socket.io": "^4.2.0"
   }
 }
