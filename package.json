@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/nwokoyepraise/friddy/issues"
   },
-  "homepage": "https://github.com/nwokoyepraise/friddy#readme"
+  "homepage": "https://github.com/nwokoyepraise/friddy#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
