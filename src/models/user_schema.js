@@ -4,6 +4,7 @@ const schema = mongoose.Schema;
 module.exports = new schema({
     user_id: {
         type: String,
+        unique: true,
         required: [true, 'user_id required']
     },
     username: {
@@ -12,6 +13,7 @@ module.exports = new schema({
     },
     email: {
         type: String,
+        unique: true,
         required: [true, 'email required']
     },
     password: {
