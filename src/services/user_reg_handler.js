@@ -20,7 +20,7 @@ module.exports.reg_user = async function (body) {
         if (password.length < 8) { return { status: false, status_code: 400, message: "Password length is too short" } }
 
         //check and return if user already exists in db
-        let res0 = await user_profile_model.get_profile_data(email);
+        let res0 = await user_profile_model.get_profile_data('email', email);
 
         if (res0?.email) { return { status: false, status_code: 400, message: "User already exists" } }
 
@@ -34,7 +34,7 @@ module.exports.reg_user = async function (body) {
         console.log('user registered successfully!');
 
         //generate user jwt
-        const mjwt = token_handle.gen_jwt({ user_id: user_id });
+        const mjwt = token_handle.gen_jwt({ sub: user_id });
         return { status: true, data: { user_id: res1.user_id, username: res1.username, email: res1.email, jwt: mjwt } }
 
     } catch (error) {
