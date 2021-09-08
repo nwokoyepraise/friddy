@@ -10,6 +10,10 @@ module.exports = new schema({
         type: Array,
         default: []
     },
+    member_count: {
+        type: Number,
+        default: 0
+    },
     message_count: {
         type: Number,
         default: 0
