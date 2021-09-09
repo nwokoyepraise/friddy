@@ -1,5 +1,6 @@
 const room_chat_handler = require('../services/room_chat_handler');
 const session_handler = require('../services/session_handler');
+const interaction_handler = require('../services/interaction_handler');
 
 module.exports = function (room_chat_nsp) {
     try {
@@ -19,6 +20,7 @@ module.exports = function (room_chat_nsp) {
                 try {
                     room_chat_nsp.to(chat.room_id).emit('new_message', { chat });
                     await room_chat_handler.save_chat_to_db(chat, user_id);
+                    await interaction_handler.log_interaction(user_id, 'chat_message', chat.room_id)
                 } catch (error) {
                     console.error(error)
                 }
