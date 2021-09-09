@@ -1,3 +1,4 @@
+const room_chat_handler = require('../services/room_chat_handler');
 
 module.exports = function (room_chat_nsp) {
     try {
@@ -9,10 +10,10 @@ module.exports = function (room_chat_nsp) {
                 console.log(`socket ${socket.id} joined room ${room_id}!`)
             });
 
-            socket.on('message', async function (data, ack) {
+            socket.on('message', async function (chat, ack) {
                 try {
-                    room_chat_nsp.to(data.room_id).emit('new_message', {});
-                    console.log('new_message');
+                    room_chat_nsp.to(chat.room_id).emit('new_message', {chat});
+                    await room_chat_handler.save_chat_to_db(chat, user_id);
                 } catch (error) {
                     console.error(error)
                 }

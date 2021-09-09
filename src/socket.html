@@ -17,12 +17,12 @@
 
         socket.emit('join_room', room_id);
 
-        socket.emit('message', {  }, function (ack) {
+        socket.emit('message', { room_id: room_id, message_string: 'hello' }, function (ack) {
             
         });
 
-        socket.on('new_message', function(data){
-
+        socket.on('new_message', function(chat){
+            console.log(chat)
         })
            // var count = 10;
 
