@@ -1,13 +1,14 @@
 const room_chat_handler = require('../services/room_chat_handler');
 const session_handler = require('../services/session_handler');
 const interaction_handler = require('../services/interaction_handler');
+const room_model = require('../models/room_model');
 
 module.exports = function (room_chat_nsp) {
     try {
         room_chat_nsp.on('connection', async (socket) => {
             let user_id = socket.request.user.user_id;
             let time_start = new Date();
-    
+
             await session_handler.log_start(user_id, time_start);
             //console.log(`socket ${socket.id} just got connected!`);
 
@@ -18,7 +19,11 @@ module.exports = function (room_chat_nsp) {
 
             socket.on('message', async function (chat, ack) {
                 try {
-                    room_chat_nsp.to(chat.room_id).emit('new_message', { chat });
+                    let members = await room_model.get_members(chat.room_id);
+                    if (!members.includes(user_id)) {
+                        return room_chat_nsp.to(socket).emit('message_error', 'user not a member of room');
+                    }
+                    room_chat_nsp.to(chat.room_id).emit('new_message', chat);
                     await room_chat_handler.save_chat_to_db(chat, user_id);
                     await interaction_handler.log_interaction(user_id, 'chat_message', chat.room_id);
                 } catch (error) {
@@ -35,8 +40,8 @@ module.exports = function (room_chat_nsp) {
             });
 
             socket.on('disconnect', async function (reason) {
-               await session_handler.log_end(user_id, time_start);
-               //console.log(`socket ${socket.id} just got disconnected!`);
+                await session_handler.log_end(user_id, time_start);
+                //console.log(`socket ${socket.id} just got disconnected!`);
             });
         });
     } catch (error) {
