@@ -10,7 +10,7 @@ const interaction = new schema({
     },
     interaction_log: [{
         action: {type: String, required: [true, 'action required']},
-        room_id: {ype: mongoose.Schema.Types.ObjectId, required: [true, 'room_id required']},
+        room_id: {type: mongoose.Schema.Types.ObjectId, required: [true, 'room_id required']},
         timestamp: {type: Date, default: new Date()}
     }]
 });
