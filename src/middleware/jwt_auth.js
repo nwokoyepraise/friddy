@@ -20,6 +20,6 @@ passport.use(new jwt_strategy(opts, async function (jwt_payload, done) {
         }
     } catch (error) {
         done(error);
-        console.log(error);
+        console.error(error);
     }
 }));
