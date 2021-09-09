@@ -26,9 +26,10 @@ module.exports.join_room = async function (body, user) {
 
         //return if there is no match to document id
         if (res1.matchedCount == 0) { return { status: false, status_code: 404, message: 'Room not found' } }
-        
+
         //return if update was not successful
         if (!res1 || res1.modifiedCount != 1) { return { status: false, status_code: 500, message: 'Internal Server Error' } }
+        await interaction_handler.log_interaction(user.user_id, 'join_room', body.room_id);
         return { status: true, data: { message: 'success' } }
     } catch (error) {
         console.error(error);
