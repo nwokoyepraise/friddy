@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
+const mongo_conn = require('../config/mongo_config');
 const schema = mongoose.Schema;
 
-module.exports = new schema({
-    group_id: {
+const room_chat = new schema({
+    room_id: {
         type: String,
         required: [true, 'group_id required']
     },
@@ -24,13 +25,6 @@ module.exports = new schema({
     timestamp: {
         type: Date,
         default: new Date()
-    },
-    received_by: {
-        type: Array,//[{user_id: user_id, timestamp: timestamp},...]
-        default: []
-    }, 
-    seen_by: {
-        type: Array,//[{user_id: user_id, timestamp: timestamp},...]
-        default: []
-    } 
+    }
 });
+module.exports = mongo_conn.model('room_chat', room_chat, 'room_chat');

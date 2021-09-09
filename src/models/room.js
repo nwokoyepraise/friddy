@@ -3,8 +3,8 @@ const mongo_conn = require('../config/mongo_config');
 const schema = mongoose.Schema;
 
 
-const group = new schema({
-    group_name: {
+const room = new schema({
+    room_name: {
         type: String,
         required: [true, 'group name required']
     },
@@ -26,4 +26,4 @@ const group = new schema({
     }
 });
 
-module.exports = mongo_conn.model('groups', group, 'groups');
+module.exports = mongo_conn.model('rooms', room, 'rooms');
