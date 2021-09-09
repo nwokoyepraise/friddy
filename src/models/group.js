@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const mongo_conn = require('../config/mongo_config');
 const schema = mongoose.Schema;
 
-module.exports = new schema({
+
+const group = new schema({
     group_name: {
         type: String,
         required: [true, 'group name required']
@@ -23,3 +25,5 @@ module.exports = new schema({
         default: new Date()
     }
 });
+
+module.exports = mongo_conn.model('groups', group, 'groups');

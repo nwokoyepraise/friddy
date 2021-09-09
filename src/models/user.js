@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const mongo_conn = require('../config/mongo_config');
 const schema = mongoose.Schema;
 
-module.exports = new schema({
+const user = new schema({
     user_id: {
         type: String,
         unique: true,
@@ -25,3 +26,5 @@ module.exports = new schema({
         default: new Date
     }
 });
+
+module.exports = mongo_conn.model('user_profile', user, 'user_profile');

@@ -13,7 +13,7 @@ passport.use(new jwt_strategy(opts, async function (jwt_payload, done) {
     try {
         let user = await user_profile_model.get_profile_data('user_id', jwt_payload.sub);
         if (!user || !user.user_id) {
-            return done(new Error('user not found'), false);
+            return done(null, false);
         }
         else if (user) {
             return done(null, user);
