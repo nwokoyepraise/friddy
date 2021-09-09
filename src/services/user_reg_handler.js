@@ -12,7 +12,7 @@ module.exports.reg_user = async function (body) {
         //check and return if email or password o username does not exist or if null
         if (!email || !password || !username) { return { status: false, status_code: 400, message: "Null values not allowed" } }
 
-        //check if email and password is valid according to user model
+        //check if email and password is valid according model
         const valid_email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
         if (!valid_email.test(email)) { return { status: false, status_code: 400, message: "User email invalid" } }

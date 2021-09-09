@@ -11,7 +11,9 @@ opts.secretOrKey = key;
 
 passport.use(new jwt_strategy(opts, async function (jwt_payload, done) {
     try {
+        //retrieve credential from DB
         let user = await user_profile_model.get_profile_data('user_id', jwt_payload.sub);
+        
         if (!user || !user.user_id) {
             return done(null, false);
         }

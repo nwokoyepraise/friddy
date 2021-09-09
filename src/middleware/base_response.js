@@ -1,3 +1,4 @@
+//model middleware for handling user response
 module.exports = function (req, res) {
     let data = res.locals.data;
     //revert response to user

@@ -19,12 +19,18 @@ module.exports = function (room_chat_nsp) {
 
             socket.on('message', async function (chat, ack) {
                 try {
+                    //check if user is member or group
                     let members = await room_model.get_members(chat.room_id);
                     if (!members.includes(user_id)) {
                         return room_chat_nsp.to(socket).emit('message_error', 'user not a member of room');
                     }
+                    //emit message to room
                     room_chat_nsp.to(chat.room_id).emit('new_message', chat);
+
+                    //save chat to db
                     await room_chat_handler.save_chat_to_db(chat, user_id);
+                    
+                    //log user interaction
                     await interaction_handler.log_interaction(user_id, 'chat_message', chat.room_id);
                 } catch (error) {
                     console.error(error)
