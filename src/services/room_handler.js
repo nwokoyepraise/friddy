@@ -8,6 +8,12 @@ module.exports.create_room = async function (body, user) {
         let res0 = await room_model.create_room(body.room_name);
 
         if (!res0 || !res0._id) { return { status: false, status_code: 500, message: 'Internal Server Error' } }
+        
+        //add user to room
+        await room_model.join_room(res0._id, user.user_id);
+        
+        //log user interaction
+        await interaction_handler.log_interaction(user.user_id, 'join_room', res0._id);
         return { status: true, data: res0 }
     } catch (error) {
         console.error(error);
