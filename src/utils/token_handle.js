@@ -14,3 +14,10 @@ module.exports.hash_password = async function (password) {
         console.error(error);
     }
 }
+
+module.exports.get_auth = function (auth_header) {
+    let auth;
+    if (!auth_header) { return '' }
+    auth = auth_header.split(' ')[1];
+    return auth;
+}

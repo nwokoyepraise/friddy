@@ -23,8 +23,9 @@ app.use('/api/user_login', passport.authenticate('local', { session: false }), u
 app.use('/api/room_chats/create_room', passport.authenticate('jwt', { session: false }), create_room, base_response);
 app.use('/api/room_chats/join_room', passport.authenticate('jwt', { session: false }), join_room, base_response);
 
-const wrap_middleware = middleware => (socket, next) => middleware(socket.request, {}, next);
-room_chat_nsp.use(wrap_middleware(passport.authenticate('jwt', { session: false })), room_chat(room_chat_nsp));
+// const wrap_middleware = middleware => (socket, next) => middleware(socket.request, {}, next);
+// wrap_middleware(passport.authenticate('jwt', { session: false })), 
+room_chat(room_chat_nsp);
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/socket.html');
