@@ -57,12 +57,12 @@ module.exports = function (room_chat_nsp) {
                 }
             });
 
-            socket.on('typing', function (conversation_id) {
-                socket.to(conversation_id).emit('user_typing', { status: 1 });
+            socket.on('typing', function (room_id) {
+                socket.to(room_id).emit('user_typing', { status: 1 });
             });
 
-            socket.on('typing_stopped', function (conversation_id) {
-                socket.to(conversation_id).emit('user_typing_stopped', { status: 'stopped' });
+            socket.on('typing_stopped', function (room_id) {
+                socket.to(room_id).emit('user_typing_stopped', { status: 'stopped' });
             });
 
             socket.on('disconnect', async function (reason) {
