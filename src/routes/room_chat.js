@@ -52,6 +52,9 @@ module.exports = function (room_chat_nsp) {
                     //save chat to db
                     await room_chat_handler.save_chat_to_db(chat, user_id, timestamp);
 
+                    //update room message count
+                    await room_model.update_message_count(chat.room_id)
+
                     //log user interaction
                     await interaction_handler.log_interaction(user_id, 'chat_message', chat.room_id);
                 } catch (error) {
