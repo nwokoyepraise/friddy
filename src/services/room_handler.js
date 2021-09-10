@@ -1,4 +1,5 @@
 const room_model = require('../models/room_model');
+const interaction_handler = require('./interaction_handler');
 
 module.exports.create_room = async function (body, user) {
     try {
@@ -31,7 +32,7 @@ module.exports.join_room = async function (body, user) {
         //return if update was not successful
         if (!res1 || res1.modifiedCount != 1) { return { status: false, status_code: 500, message: 'Internal Server Error' } }
 
-        //kog user interaction
+        //log user interaction
         await interaction_handler.log_interaction(user.user_id, 'join_room', body.room_id);
 
         //revert response data
