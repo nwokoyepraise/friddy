@@ -15,9 +15,9 @@ module.exports.auth_conn = async function (auth_header) {
     }
 }
 
-module.exports.save_chat_to_db = async function (chat, user_id) {
+module.exports.save_chat_to_db = async function (chat, user_id, timestamp) {
     try {
-        let data = await room_chat_model.save_chat_to_db(chat, user_id)
+        let data = await room_chat_model.save_chat_to_db(chat, user_id, timestamp)
     } catch (error) {
         console.error(error);
         return { status: false, status_code: 500, message: 'Internal Server Error' }

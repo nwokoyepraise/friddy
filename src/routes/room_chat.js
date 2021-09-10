@@ -44,11 +44,13 @@ module.exports = function (room_chat_nsp) {
                         //emit error message to particular socket
                         return room_chat_nsp.to(socket.id).emit('message_error', 'user not a member of room or room not found');
                     }
+
+                    let timestamp = new Date();
                     //emit message to room
-                    room_chat_nsp.to(chat.room_id).emit('new_message', {...chat, sender_id: user_id});
+                    room_chat_nsp.to(chat.room_id).emit('new_message', {...chat, sender_id: user_id, timestamp: timestamp});
 
                     //save chat to db
-                    await room_chat_handler.save_chat_to_db(chat, user_id);
+                    await room_chat_handler.save_chat_to_db(chat, user_id, timestamp);
 
                     //log user interaction
                     await interaction_handler.log_interaction(user_id, 'chat_message', chat.room_id);
