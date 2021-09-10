@@ -10,7 +10,7 @@ module.exports.create_room = async function (body, user) {
         if (!res0 || !res0._id) { return { status: false, status_code: 500, message: 'Internal Server Error' } }
         
         //add user to room
-        await room_model.join_room(res0._id, user.user_id);
+        res0 = await room_model.join_room(res0._id, user.user_id);
         
         //log user interaction
         await interaction_handler.log_interaction(user.user_id, 'join_room', res0._id);
@@ -32,11 +32,8 @@ module.exports.join_room = async function (body, user) {
         //add user to room
         let res1 = await room_model.join_room(body.room_id, user.user_id);
 
-        //return if there is no match to document id i.e room not found
-        if (res1.matchedCount == 0) { return { status: false, status_code: 404, message: 'Room not found' } }
-
         //return if update was not successful
-        if (!res1 || res1.modifiedCount != 1) { return { status: false, status_code: 500, message: 'Internal Server Error' } }
+        if (!res1 || !res1._id) { return { status: false, status_code: 404, message: 'Room not found' } }
 
         //log user interaction
         await interaction_handler.log_interaction(user.user_id, 'join_room', body.room_id);

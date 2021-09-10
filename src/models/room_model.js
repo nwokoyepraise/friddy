@@ -10,7 +10,7 @@ module.exports.create_room = async function (room_name) {
 
 module.exports.join_room = async function (room_id, user_id) {
     try {
-        return await room.updateOne({ _id: room_id }, { $addToSet: { members: user_id }, $inc: { member_count: 1 } });
+        return await room.findOneAndUpdate({ _id: room_id }, { $addToSet: { members: user_id }, $inc: { member_count: 1 } }, {new: true});
     } catch (error) {
         console.log(error);
     }
