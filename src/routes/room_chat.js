@@ -38,7 +38,7 @@ module.exports = function (room_chat_nsp) {
             socket.on('message', async function (chat, ack) {
                 try {
                     //check and revert is not a member of room or if room does not exist
-                    let members = (await room_model.get_members(chat.room_id)).members;
+                    let members = (await room_model.get_members(chat.room_id))?.members;
                     
                     if (!members || !members.includes(user_id)) {
                         //emit error message to particular socket
