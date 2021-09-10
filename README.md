@@ -54,6 +54,7 @@ Backend Application for Friddy Project Assessment
       <a href="#getting-started">Getting Started</a>
     </li>
     <li><a href="#api-endpoints">API Endpoints</a></li>
+    <li><a href="#uml-diagran">UML Diagrams</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -281,6 +282,19 @@ socket.on('user_typing', function(data){
  
 ### Interaction Logging
 USer activity is also logged when user performs activity such as joining/becoming member of chat rooms and Interactions such as sending messages to chat rooms along with timestamps of the events.
+
+
+
+<!-- UML DIAGRAM -->
+## UML Diagrams
+
+### Class Diagram:
+
+![class_diagram drawio](https://user-images.githubusercontent.com/65955286/132888538-76908b14-22a7-4518-a3cf-95c32daccd7c.png)
+
+### DB Diagram:
+
+![db_diagram drawio](https://user-images.githubusercontent.com/65955286/132888598-9fbf18ac-9f6c-469e-a6d1-cf39bce6c4c4.png)
 
 
 <!-- ROADMAP -->
