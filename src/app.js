@@ -14,10 +14,8 @@ const join_room = require('./routes/join_room');
 const io = require('socket.io')(server);
 const room_chat_nsp = io.of('/chat_room');
 const room_chat = require('./routes/room_chat');
-const helmet = require('helmet');
 
 app.use(express.json());
-app.use(helmet());
 
 //load routes
 app.use('/api/user_reg', user_reg, base_response);
