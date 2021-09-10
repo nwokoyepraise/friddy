@@ -58,11 +58,11 @@ module.exports = function (room_chat_nsp) {
             });
 
             socket.on('typing', function (room_id) {
-                socket.to(room_id).emit('user_typing', { status: 1 });
+                socket.to(room_id).emit('user_typing', { status: 'started', user_id: user_id });
             });
 
             socket.on('typing_stopped', function (room_id) {
-                socket.to(room_id).emit('user_typing_stopped', { status: 'stopped' });
+                socket.to(room_id).emit('user_typing_stopped', { status: 'stopped', user_id: user_id });
             });
 
             socket.on('disconnect', async function (reason) {
