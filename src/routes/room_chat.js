@@ -45,7 +45,7 @@ module.exports = function (room_chat_nsp) {
                         return room_chat_nsp.to(socket.id).emit('message_error', 'user not a member of room or room not found');
                     }
                     //emit message to room
-                    room_chat_nsp.to(chat.room_id).emit('new_message', chat);
+                    room_chat_nsp.to(chat.room_id).emit('new_message', {...chat, sender_id: user_id});
 
                     //save chat to db
                     await room_chat_handler.save_chat_to_db(chat, user_id);
